@@ -1,9 +1,9 @@
 [versions]
-kotlin = "1.5.21"
-ktor-server = "1.6.1"
+kotlin = "1.5.32"
+ktor-server = "1.6.7"
 
 [libraries]
-jackson-datatype-jsr310 = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8"
+jackson-datatype-jsr310 = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.1"
 kotlin-scripting-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable", version.ref = "kotlin" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -16,9 +16,9 @@ ktor-server-host-common = { module = "io.ktor:ktor-server-host-common", version.
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor-server" }
 ktor-server-sessions = { module = "io.ktor:ktor-server-sessions", version.ref = "ktor-server" }
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor-server" }
-logback-classic = "ch.qos.logback:logback-classic:1.2.1"
-reflections = "org.reflections:reflections:0.9.11"
-slf4j-api = "org.slf4j:slf4j-api:1.7.30"
+logback-classic = "ch.qos.logback:logback-classic:1.2.10"
+reflections = "org.reflections:reflections:0.10.2"
+slf4j-api = "org.slf4j:slf4j-api:1.7.35"
 swagger-ui = "org.webjars:swagger-ui:3.25.0"
 
 [plugins]
