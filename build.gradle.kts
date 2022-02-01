@@ -1,6 +1,8 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.github.ben-manes.versions") version "0.41.0"
-    id("org.jetbrains.kotlin.jvm") version "1.5.21"
+    alias(libs.plugins.gradle.versionUpdate)
+    alias(libs.plugins.gradle.versionCatalogUpdate)
+    alias(libs.plugins.gradle.kotlin.jvm)
     id("maven-publish")
 }
 
@@ -21,25 +23,26 @@ publishing {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.slf4j:slf4j-api:1.7.30")
-    implementation("io.ktor:ktor-server-core:1.6.1")
-    implementation("io.ktor:ktor-server-host-common:1.6.1")
-    implementation("io.ktor:ktor-metrics:1.6.1")
-    implementation("io.ktor:ktor-server-sessions:1.6.1")
+    implementation(libs.kotlin.stdlib.jdk8)
+    implementation(libs.slf4j.api)
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.host.common)
+    implementation(libs.ktor.server.sessions)
+    implementation(libs.ktor.metrics)
 
-    implementation("io.ktor:ktor-jackson:1.6.1") // needed for parameter parsing and multipart parsing
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8") // needed for multipart parsing
-    implementation("org.webjars:swagger-ui:3.25.0")
+    implementation(libs.ktor.jackson) // needed for parameter parsing and multipart parsing
+    implementation(libs.jackson.datatype.jsr310) // needed for multipart parsing
 
-    implementation("org.reflections:reflections:0.9.11") // only used while initializing
+    implementation(libs.swagger.ui)
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("io.ktor:ktor-server-netty:1.6.1")
-    testImplementation("io.ktor:ktor-server-test-host:1.6.1")
-    testImplementation("ch.qos.logback:logback-classic:1.2.1")
-    testImplementation("io.ktor:ktor-auth:1.6.1")
-    testImplementation("io.ktor:ktor-auth-jwt:1.6.1")
+    implementation(libs.reflections)  // only used while initializing
+
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.ktor.server.netty)
+    testImplementation(libs.ktor.server.test.host)
+    testImplementation(libs.logback.classic)
+    testImplementation(libs.ktor.auth)
+    testImplementation(libs.ktor.auth.jwt)
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java) {
