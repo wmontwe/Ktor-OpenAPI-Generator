@@ -61,7 +61,7 @@ git submodule add https://github.com/papsign/Ktor-OpenAPI-Generator.git openapig
 Declare the folder in settings.gradle:
 ```groovy
 ...
-include 'openapigen'
+includeBuild 'openapigen'
 ```
 Declare the dependency in the main build.gradle
 ```groovy
