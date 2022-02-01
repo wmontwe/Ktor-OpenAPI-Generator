@@ -1,10 +1,10 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "$kotlin_version"
-    id 'maven-publish'
+    id("org.jetbrains.kotlin.jvm") version "$kotlin_version"
+    id("maven-publish")
 }
 
-group 'com.github.papsign'
-version '0.2-beta.20-SNAPSHOT'
+group "com.github.papsign"
+version "0.2-beta.20-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -14,7 +14,7 @@ repositories {
 publishing {
     publications {
         jarModule(MavenPublication) {
-            artifactId 'Ktor-OpenAPI-Generator'
+            artifactId "Ktor-OpenAPI-Generator"
             from components.java
         }
     }
@@ -30,7 +30,7 @@ dependencies {
 
     implementation "io.ktor:ktor-jackson:$ktor_version" // needed for parameter parsing and multipart parsing
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8" // needed for multipart parsing
-    implementation 'org.webjars:swagger-ui:3.25.0'
+    implementation "org.webjars:swagger-ui:3.25.0"
 
     implementation "org.reflections:reflections:0.9.11" // only used while initializing
 
@@ -40,8 +40,6 @@ dependencies {
     testImplementation "ch.qos.logback:logback-classic:$logback_version"
     testImplementation "io.ktor:ktor-auth:$ktor_version"
     testImplementation "io.ktor:ktor-auth-jwt:$ktor_version"
-
-
 }
 
 compileKotlin {
@@ -53,5 +51,5 @@ compileTestKotlin {
 }
 
 wrapper {
-    gradleVersion = '7.1.1'
+    gradleVersion = "7.1.1"
 }
