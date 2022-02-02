@@ -3,22 +3,20 @@ package com.papsign.ktor.openapigen.route
 import com.papsign.ktor.openapigen.APITag
 import com.papsign.ktor.openapigen.annotations.Path
 import com.papsign.ktor.openapigen.content.type.ContentTypeProvider
-import com.papsign.ktor.openapigen.getKType
 import com.papsign.ktor.openapigen.modules.handlers.RequestHandlerModule
 import com.papsign.ktor.openapigen.modules.handlers.ResponseHandlerModule
 import com.papsign.ktor.openapigen.modules.registerModule
 import com.papsign.ktor.openapigen.route.modules.HttpMethodProviderModule
 import com.papsign.ktor.openapigen.route.modules.PathProviderModule
 import io.ktor.http.HttpMethod
-import io.ktor.routing.HttpMethodRouteSelector
-import io.ktor.routing.createRouteFromPath
+import io.ktor.server.routing.HttpMethodRouteSelector
+import io.ktor.server.routing.createRouteFromPath
 import io.ktor.util.pipeline.ContextDsl
 import kotlin.reflect.KType
 import kotlin.reflect.KTypeProjection
 import kotlin.reflect.KVariance
 import kotlin.reflect.full.createType
 import kotlin.reflect.full.findAnnotation
-import kotlin.reflect.full.starProjectedType
 import kotlin.reflect.jvm.jvmErasure
 import kotlin.reflect.typeOf
 
@@ -62,7 +60,10 @@ fun <TRoute : OpenAPIRoute<TRoute>> TRoute.provider(vararg content: ContentTypeP
  * Creates a new route matching the specified [content]
  */
 @ContextDsl
-inline fun <TRoute : OpenAPIRoute<TRoute>> TRoute.provider(vararg content: ContentTypeProvider, crossinline fn: TRoute.() -> Unit) {
+inline fun <TRoute : OpenAPIRoute<TRoute>> TRoute.provider(
+    vararg content: ContentTypeProvider,
+    crossinline fn: TRoute.() -> Unit
+) {
     provider(*content).fn()
 }
 

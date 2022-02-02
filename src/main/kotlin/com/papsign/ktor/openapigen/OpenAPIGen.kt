@@ -7,10 +7,10 @@ import com.papsign.ktor.openapigen.model.info.InfoModel
 import com.papsign.ktor.openapigen.model.server.ServerModel
 import com.papsign.ktor.openapigen.modules.CachingModuleProvider
 import com.papsign.ktor.openapigen.modules.OpenAPIModule
-import io.ktor.application.ApplicationCallPipeline
-import io.ktor.application.ApplicationFeature
-import io.ktor.application.call
-import io.ktor.request.path
+import io.ktor.server.application.ApplicationCallPipeline
+import io.ktor.server.application.Plugin
+import io.ktor.server.application.call
+import io.ktor.server.request.path
 import io.ktor.util.AttributeKey
 import org.reflections.Reflections
 import kotlin.reflect.full.starProjectedType
@@ -99,7 +99,7 @@ class OpenAPIGen(
         return tag.name
     }
 
-    companion object Feature : ApplicationFeature<ApplicationCallPipeline, Configuration, OpenAPIGen> {
+    companion object Feature : Plugin<ApplicationCallPipeline, Configuration, OpenAPIGen> {
 
         override val key = AttributeKey<OpenAPIGen>("OpenAPI Generator")
 

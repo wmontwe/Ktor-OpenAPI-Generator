@@ -6,8 +6,8 @@ import com.papsign.ktor.openapigen.modules.ofType
 import com.papsign.ktor.openapigen.modules.providers.AuthProvider
 import com.papsign.ktor.openapigen.modules.providers.StatusProvider
 import com.papsign.ktor.openapigen.route.OpenAPIRoute
-import io.ktor.application.ApplicationCall
 import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.ApplicationCall
 import io.ktor.util.pipeline.PipelineContext
 import kotlin.reflect.full.findAnnotation
 
@@ -28,9 +28,9 @@ interface OpenAPIPipelineAuthContext<TAuth, TResponse> : OpenAPIPipelineResponse
 }
 
 class ResponseContextImpl<TResponse>(
-        override val pipeline: PipelineContext<Unit, ApplicationCall>,
-        override val route: OpenAPIRoute<*>,
-        override val responder: Responder
+    override val pipeline: PipelineContext<Unit, ApplicationCall>,
+    override val route: OpenAPIRoute<*>,
+    override val responder: Responder
 ) : OpenAPIPipelineResponseContext<TResponse>
 
 class AuthResponseContextImpl<TAuth, TResponse>(

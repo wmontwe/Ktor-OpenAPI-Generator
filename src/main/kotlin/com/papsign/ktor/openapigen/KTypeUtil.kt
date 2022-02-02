@@ -1,9 +1,13 @@
 package com.papsign.ktor.openapigen
 
-import kotlin.reflect.*
+import kotlin.reflect.KClass
+import kotlin.reflect.KProperty1
+import kotlin.reflect.KType
+import kotlin.reflect.KTypeParameter
 import kotlin.reflect.full.createType
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.jvmErasure
+import kotlin.reflect.typeOf
 
 val unitKType = getKType<Unit>()
 

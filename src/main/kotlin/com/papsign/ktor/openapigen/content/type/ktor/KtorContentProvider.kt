@@ -13,11 +13,13 @@ import com.papsign.ktor.openapigen.modules.ModuleProvider
 import com.papsign.ktor.openapigen.modules.ofType
 import com.papsign.ktor.openapigen.schema.builder.provider.FinalSchemaBuilderProviderModule
 import com.papsign.ktor.openapigen.unitKType
-import io.ktor.application.*
-import io.ktor.features.*
 import io.ktor.http.*
-import io.ktor.request.*
-import io.ktor.response.*
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.application.call
+import io.ktor.server.application.pluginOrNull
+import io.ktor.server.plugins.ContentNegotiation
+import io.ktor.server.request.receive
+import io.ktor.server.response.respond
 import io.ktor.util.pipeline.*
 import kotlin.reflect.KType
 import kotlin.reflect.full.findAnnotation
@@ -32,7 +34,7 @@ object KtorContentProvider : ContentTypeProvider, BodyParser, ResponseSerializer
     private var contentTypes: Set<ContentType>? = null
 
     private fun initContentTypes(apiGen: OpenAPIGen): Set<ContentType>? {
-        contentNegotiation = contentNegotiation ?: apiGen.pipeline.featureOrNull(ContentNegotiation) ?: return null
+        contentNegotiation = contentNegotiation ?: apiGen.pipeline.pluginOrNull(ContentNegotiation) ?: return null
         contentTypes = contentNegotiation!!.registrations.map { it.contentType }.toSet()
         return contentTypes
     }

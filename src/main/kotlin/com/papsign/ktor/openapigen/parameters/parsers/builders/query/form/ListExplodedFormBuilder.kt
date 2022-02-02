@@ -1,7 +1,6 @@
 package com.papsign.ktor.openapigen.parameters.parsers.builders.query.form
 
 import com.papsign.ktor.openapigen.parameters.parsers.builders.BuilderSelector
-import com.papsign.ktor.openapigen.parameters.parsers.builders.query.delimited.ListSpaceDelimitedBuilder
 import kotlin.reflect.KType
 import kotlin.reflect.full.isSubclassOf
 import kotlin.reflect.jvm.jvmErasure

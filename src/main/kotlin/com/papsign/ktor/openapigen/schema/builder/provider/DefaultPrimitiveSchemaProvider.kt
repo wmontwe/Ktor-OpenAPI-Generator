@@ -13,8 +13,15 @@ import com.papsign.ktor.openapigen.schema.builder.SchemaBuilder
 import java.io.InputStream
 import java.math.BigDecimal
 import java.math.BigInteger
-import java.time.*
-import java.util.*
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.OffsetDateTime
+import java.time.OffsetTime
+import java.time.ZonedDateTime
+import java.util.Date
+import java.util.UUID
 import kotlin.reflect.KType
 
 object DefaultPrimitiveSchemaProvider: SchemaBuilderProviderModule, OpenAPIGenModuleExtension, DefaultOpenAPIModule {

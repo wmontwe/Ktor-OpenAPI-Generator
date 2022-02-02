@@ -1,8 +1,8 @@
 package com.papsign.ktor.openapigen.parameters.handlers
 
 import com.papsign.ktor.openapigen.OpenAPIGen
-import com.papsign.ktor.openapigen.annotations.mapping.remapOpenAPINames
 import com.papsign.ktor.openapigen.annotations.mapping.openAPIName
+import com.papsign.ktor.openapigen.annotations.mapping.remapOpenAPINames
 import com.papsign.ktor.openapigen.annotations.parameters.HeaderParam
 import com.papsign.ktor.openapigen.annotations.parameters.PathParam
 import com.papsign.ktor.openapigen.annotations.parameters.QueryParam

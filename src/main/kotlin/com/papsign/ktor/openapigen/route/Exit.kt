@@ -1,6 +1,6 @@
 package com.papsign.ktor.openapigen.route
 
-import io.ktor.routing.Route
+import io.ktor.server.routing.Route
 import io.ktor.util.pipeline.ContextDsl
 
 @ContextDsl

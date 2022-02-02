@@ -1,7 +1,6 @@
 package com.papsign.ktor.openapigen.validation
 
 import com.papsign.ktor.openapigen.*
-import com.papsign.ktor.openapigen.classLogger
 import kotlin.reflect.*
 import kotlin.reflect.full.*
 import kotlin.reflect.jvm.*

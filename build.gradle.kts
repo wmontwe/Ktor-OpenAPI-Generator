@@ -25,12 +25,29 @@ publishing {
 dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
     implementation(libs.slf4j.api)
-    implementation(libs.ktor.server.core)
+
+    implementation(libs.ktor.server.autoHeadResponse)
+    implementation(libs.ktor.server.statusPages)
+    implementation(libs.ktor.server.callId)
+    implementation(libs.ktor.server.doubleReceive)
+    implementation(libs.ktor.server.dataConversion)
+    implementation(libs.ktor.server.defaultHeaders)
+    implementation(libs.ktor.server.compression)
+    implementation(libs.ktor.server.cachingHeaders)
+    implementation(libs.ktor.server.conditionalHeaders)
+    implementation(libs.ktor.server.cors)
+    implementation(libs.ktor.server.forwardedHeaderSupport)
+    implementation(libs.ktor.server.hsts)
+    implementation(libs.ktor.server.httpsRedirect)
+    implementation(libs.ktor.server.partialContent)
+    implementation(libs.ktor.server.callLogging)
+
     implementation(libs.ktor.server.host.common)
     implementation(libs.ktor.server.sessions)
-    implementation(libs.ktor.metrics)
+    implementation(libs.ktor.server.metrics)
 
-    implementation(libs.ktor.jackson) // needed for parameter parsing and multipart parsing
+    implementation(libs.ktor.server.contentNegotiation)
+    implementation(libs.ktor.serialization.jackson) // needed for parameter parsing and multipart parsing
     implementation(libs.jackson.datatype.jsr310) // needed for multipart parsing
 
     implementation(libs.swagger.ui)
@@ -41,8 +58,13 @@ dependencies {
     testImplementation(libs.ktor.server.netty)
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.logback.classic)
-    testImplementation(libs.ktor.auth)
-    testImplementation(libs.ktor.auth.jwt)
+    testImplementation(libs.ktor.server.auth)
+    testImplementation(libs.ktor.server.auth.jwt)
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java) {
@@ -51,12 +73,6 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java) {
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-Xuse-experimental=kotlin.ExperimentalStdlibApi"
         )
-    }
-}
-
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java) {
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 }
 

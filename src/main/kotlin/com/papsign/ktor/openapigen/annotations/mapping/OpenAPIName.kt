@@ -1,7 +1,7 @@
 package com.papsign.ktor.openapigen.annotations.mapping
 
 import com.papsign.ktor.openapigen.annotations.parameters.HeaderParam
-import java.util.*
+import java.util.Collections
 import kotlin.reflect.KParameter
 import kotlin.reflect.full.findAnnotation
 

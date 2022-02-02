@@ -1,6 +1,5 @@
 package com.papsign.ktor.openapigen.modules.handlers
 
-import com.papsign.ktor.openapigen.unitKType
 import com.papsign.ktor.openapigen.OpenAPIGen
 import com.papsign.ktor.openapigen.classLogger
 import com.papsign.ktor.openapigen.content.type.ContentTypeProvider
@@ -16,6 +15,7 @@ import com.papsign.ktor.openapigen.modules.ofType
 import com.papsign.ktor.openapigen.modules.openapi.OperationModule
 import com.papsign.ktor.openapigen.modules.providers.ThrowInfoProvider
 import com.papsign.ktor.openapigen.modules.registerModule
+import com.papsign.ktor.openapigen.unitKType
 
 object ThrowOperationHandler : OperationModule {
     private val log = classLogger()

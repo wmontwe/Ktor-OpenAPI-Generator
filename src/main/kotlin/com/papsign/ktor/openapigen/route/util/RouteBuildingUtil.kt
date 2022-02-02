@@ -1,15 +1,15 @@
 package com.papsign.ktor.openapigen.route.util
 
-import io.ktor.routing.Route
-import io.ktor.routing.RouteSelector
-import io.ktor.routing.RouteSelectorEvaluation
-import io.ktor.routing.RoutingResolveContext
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.RouteSelector
+import io.ktor.server.routing.RouteSelectorEvaluation
+import io.ktor.server.routing.RoutingResolveContext
 
 fun Route.createConstantChild(): Route {
     return createChild(ConstantRouteSelector())
 }
 
-class ConstantRouteSelector: RouteSelector(RouteSelectorEvaluation.qualityConstant) {
+class ConstantRouteSelector : RouteSelector() {
     override fun evaluate(context: RoutingResolveContext, segmentIndex: Int): RouteSelectorEvaluation {
         return RouteSelectorEvaluation.Constant
     }
