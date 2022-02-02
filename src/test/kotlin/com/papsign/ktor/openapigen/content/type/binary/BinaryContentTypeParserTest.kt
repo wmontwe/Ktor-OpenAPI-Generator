@@ -5,12 +5,16 @@ import com.papsign.ktor.openapigen.route.path.normal.post
 import com.papsign.ktor.openapigen.route.response.respond
 import com.papsign.ktor.openapigen.route.route
 import installOpenAPI
-import io.ktor.http.*
+import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.testing.contentType
 import io.ktor.server.testing.handleRequest
 import io.ktor.server.testing.setBody
 import io.ktor.server.testing.withTestApplication
-import org.junit.Assert.*
+import org.junit.Assert.assertArrayEquals
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.io.InputStream
 import kotlin.random.Random
@@ -66,7 +70,7 @@ class BinaryContentTypeParserTest {
                 addHeader(HttpHeaders.Accept, contentType)
                 setBody(bytes)
             }.apply {
-                assertEquals(HttpStatusCode.NotFound, response.status())
+                assertEquals(HttpStatusCode.BadRequest, response.status())
             }
 
             println("Test: Bad Accept")
@@ -75,7 +79,7 @@ class BinaryContentTypeParserTest {
                 addHeader(HttpHeaders.Accept, ContentType.Application.Json.toString())
                 setBody(bytes)
             }.apply {
-                assertEquals(HttpStatusCode.NotFound, response.status())
+                assertEquals(HttpStatusCode.BadRequest, response.status())
             }
 
             println("Test: Bad Content-Type")
@@ -84,7 +88,7 @@ class BinaryContentTypeParserTest {
                 addHeader(HttpHeaders.Accept, contentType)
                 setBody(bytes)
             }.apply {
-                assertEquals(HttpStatusCode.NotFound, response.status())
+                assertEquals(HttpStatusCode.BadRequest, response.status())
             }
         }
     }

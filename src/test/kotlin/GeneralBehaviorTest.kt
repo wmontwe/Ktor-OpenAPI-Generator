@@ -1,6 +1,6 @@
 import com.papsign.ktor.openapigen.getKType
 import org.junit.Test
-import java.util.*
+import java.util.TreeSet
 import kotlin.reflect.KType
 import kotlin.reflect.full.isSubtypeOf
 

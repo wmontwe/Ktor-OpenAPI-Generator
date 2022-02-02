@@ -18,13 +18,13 @@ import io.ktor.serialization.jackson.jackson
 import io.ktor.server.application.application
 import io.ktor.server.application.call
 import io.ktor.server.application.install
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.ContentNegotiation
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondRedirect
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
 import kotlin.reflect.KType
 
 object Basic {
@@ -93,13 +93,13 @@ object Basic {
                         info("String Post Endpoint", "This is a String Post Endpoint"),
                         exampleRequest = setOf(StringUsable("Ho")),
                         exampleResponse = StringUsable("Ho")
-                    ) { params, body ->
+                    ) { _, body ->
                         respond(body.first())
                     }
                 }
 
                 route("generic") {
-                    post<Unit, GenericTest<A?>, GenericTest<A?>> { params, body ->
+                    post<Unit, GenericTest<A?>, GenericTest<A?>> { _, body ->
                         respond(body)
                     }
                 }

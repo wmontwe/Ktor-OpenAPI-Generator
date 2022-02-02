@@ -3,7 +3,7 @@ package com.papsign.ktor.openapigen.parameters.parsers.builder.query.form
 import com.papsign.ktor.openapigen.parameters.parsers.builders.query.form.FormBuilderFactory
 import com.papsign.ktor.openapigen.parameters.parsers.testSelector
 import org.junit.Test
-import java.util.*
+import java.util.Optional
 
 class OptionalBuilderTest {
 

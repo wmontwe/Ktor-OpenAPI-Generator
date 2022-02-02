@@ -8,12 +8,18 @@ import com.papsign.ktor.openapigen.exceptions.OpenAPIRequiredFieldException
 import com.papsign.ktor.openapigen.route.apiRouting
 import com.papsign.ktor.openapigen.route.path.normal.get
 import com.papsign.ktor.openapigen.route.response.respond
-import io.ktor.server.application.*
-import io.ktor.server.plugins.*
-import io.ktor.http.*
-import io.ktor.server.response.*
-import io.ktor.server.testing.*
-import kotlin.test.*
+import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.Application
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.application.install
+import io.ktor.server.plugins.StatusPages
+import io.ktor.server.response.respond
+import io.ktor.server.testing.handleRequest
+import io.ktor.server.testing.withTestApplication
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 @StrictEnumParsing
 enum class StrictTestEnum {

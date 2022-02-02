@@ -4,7 +4,16 @@ import com.papsign.ktor.openapigen.parameters.parsers.builders.query.form.FormBu
 import com.papsign.ktor.openapigen.parameters.parsers.testSelector
 import com.papsign.ktor.openapigen.parameters.parsers.testSelectorFails
 import org.junit.Test
-import java.time.*
+import java.time.Instant
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.Month
+import java.time.OffsetDateTime
+import java.time.OffsetTime
+import java.time.ZoneId
+import java.time.ZoneOffset
+import java.time.ZonedDateTime
 
 class PrimitiveBuilderTest {
 

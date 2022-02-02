@@ -13,14 +13,15 @@ import com.papsign.ktor.openapigen.modules.ModuleProvider
 import com.papsign.ktor.openapigen.modules.ofType
 import com.papsign.ktor.openapigen.schema.builder.provider.FinalSchemaBuilderProviderModule
 import com.papsign.ktor.openapigen.unitKType
-import io.ktor.http.*
+import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call
 import io.ktor.server.application.pluginOrNull
 import io.ktor.server.plugins.ContentNegotiation
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
-import io.ktor.util.pipeline.*
+import io.ktor.util.pipeline.PipelineContext
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.util.reflect.platformType
 import kotlin.reflect.KType
@@ -79,7 +80,6 @@ object KtorContentProvider : ContentTypeProvider, BodyParser, ResponseSerializer
     }
 
     override suspend fun <T : Any> parseBody(clazz: KType, request: PipelineContext<Unit, ApplicationCall>): T {
-        // FIXME
         return request.call.receive(TypeInfo(clazz.jvmErasure, clazz.platformType, clazz))
     }
 

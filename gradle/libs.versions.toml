@@ -7,29 +7,15 @@ jackson-datatype-jsr310 = "com.fasterxml.jackson.datatype:jackson-datatype-jsr31
 kotlin-scripting-compiler-embeddable = { module = "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable", version.ref = "kotlin" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+ktor-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson", version.ref = "ktor-server" }
 ktor-server-auth = { module = "io.ktor:ktor-server-auth", version.ref = "ktor-server" }
 ktor-server-auth-jwt = { module = "io.ktor:ktor-server-auth-jwt", version.ref = "ktor-server" }
 ktor-server-contentNegotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor-server" }
-ktor-serialization-jackson = { module = "io.ktor:ktor-serialization-jackson", version.ref = "ktor-server" }
-ktor-server-metrics = { module = "io.ktor:ktor-server-metrics", version.ref = "ktor-server" }
-ktor-server-autoHeadResponse = { module = "io.ktor:ktor-server-auto-head-response", version.ref = "ktor-server" }
-ktor-server-statusPages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor-server" }
-ktor-server-callId = { module = "io.ktor:ktor-server-call-id", version.ref = "ktor-server" }
-ktor-server-doubleReceive = { module = "io.ktor:ktor-server-double-receive", version.ref = "ktor-server" }
-ktor-server-dataConversion = { module = "io.ktor:ktor-server-data-conversion", version.ref = "ktor-server" }
-ktor-server-defaultHeaders = { module = "io.ktor:ktor-server-default-headers", version.ref = "ktor-server" }
-ktor-server-compression = { module = "io.ktor:ktor-server-compression", version.ref = "ktor-server" }
-ktor-server-cachingHeaders = { module = "io.ktor:ktor-server-caching-headers", version.ref = "ktor-server" }
-ktor-server-conditionalHeaders = { module = "io.ktor:ktor-server-conditional-headers", version.ref = "ktor-server" }
-ktor-server-cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor-server" }
-ktor-server-forwardedHeaderSupport = { module = "io.ktor:ktor-server-forwarded-header", version.ref = "ktor-server" }
-ktor-server-hsts = { module = "io.ktor:ktor-server-hsts", version.ref = "ktor-server" }
-ktor-server-httpsRedirect = { module = "io.ktor:ktor-server-http-redirect", version.ref = "ktor-server" }
-ktor-server-partialContent = { module = "io.ktor:ktor-server-partial-content", version.ref = "ktor-server" }
-ktor-server-callLogging = { module = "io.ktor:ktor-server-call-logging", version.ref = "ktor-server" }
 ktor-server-host-common = { module = "io.ktor:ktor-server-host-common", version.ref = "ktor-server" }
+ktor-server-metrics = { module = "io.ktor:ktor-server-metrics", version.ref = "ktor-server" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor-server" }
 ktor-server-sessions = { module = "io.ktor:ktor-server-sessions", version.ref = "ktor-server" }
+ktor-server-statusPages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor-server" }
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor-server" }
 logback-classic = "ch.qos.logback:logback-classic:1.2.10"
 reflections = "org.reflections:reflections:0.10.2"

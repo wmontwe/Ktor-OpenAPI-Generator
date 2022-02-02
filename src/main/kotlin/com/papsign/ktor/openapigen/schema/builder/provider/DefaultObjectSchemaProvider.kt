@@ -13,13 +13,6 @@ import com.papsign.ktor.openapigen.schema.builder.FinalSchemaBuilder
 import com.papsign.ktor.openapigen.schema.builder.SchemaBuilder
 import com.papsign.ktor.openapigen.schema.namer.DefaultSchemaNamer
 import com.papsign.ktor.openapigen.schema.namer.SchemaNamer
-import kotlin.collections.HashMap
-import kotlin.collections.List
-import kotlin.collections.associate
-import kotlin.collections.filter
-import kotlin.collections.lastOrNull
-import kotlin.collections.listOf
-import kotlin.collections.map
 import kotlin.collections.set
 import kotlin.reflect.KType
 import kotlin.reflect.KVisibility

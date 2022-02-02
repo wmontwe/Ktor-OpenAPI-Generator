@@ -1,5 +1,6 @@
 package com.papsign.ktor.openapigen
 
+import TestServer
 import TestServer.setupBaseTestServer
 import com.papsign.ktor.openapigen.content.type.multipart.FormDataRequest
 import com.papsign.ktor.openapigen.content.type.multipart.FormDataRequestType
@@ -8,9 +9,11 @@ import com.papsign.ktor.openapigen.route.apiRouting
 import com.papsign.ktor.openapigen.route.path.normal.post
 import com.papsign.ktor.openapigen.route.response.respond
 import com.papsign.ktor.openapigen.route.route
-import io.ktor.server.application.*
-import io.ktor.http.*
-import io.ktor.server.testing.*
+import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.log
+import io.ktor.server.testing.handleRequest
+import io.ktor.server.testing.withTestApplication
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test

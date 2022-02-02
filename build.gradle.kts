@@ -24,27 +24,12 @@ publishing {
 
 dependencies {
     implementation(libs.kotlin.stdlib.jdk8)
-    implementation(libs.slf4j.api)
-
-    implementation(libs.ktor.server.autoHeadResponse)
-    implementation(libs.ktor.server.statusPages)
-    implementation(libs.ktor.server.callId)
-    implementation(libs.ktor.server.doubleReceive)
-    implementation(libs.ktor.server.dataConversion)
-    implementation(libs.ktor.server.defaultHeaders)
-    implementation(libs.ktor.server.compression)
-    implementation(libs.ktor.server.cachingHeaders)
-    implementation(libs.ktor.server.conditionalHeaders)
-    implementation(libs.ktor.server.cors)
-    implementation(libs.ktor.server.forwardedHeaderSupport)
-    implementation(libs.ktor.server.hsts)
-    implementation(libs.ktor.server.httpsRedirect)
-    implementation(libs.ktor.server.partialContent)
-    implementation(libs.ktor.server.callLogging)
 
     implementation(libs.ktor.server.host.common)
+    implementation(libs.ktor.server.statusPages)
     implementation(libs.ktor.server.sessions)
     implementation(libs.ktor.server.metrics)
+    implementation(libs.slf4j.api)
 
     implementation(libs.ktor.server.contentNegotiation)
     implementation(libs.ktor.serialization.jackson) // needed for parameter parsing and multipart parsing
