@@ -25,7 +25,7 @@ object RouteHandler: HandlerModule {
         val operationModules = provider.ofType<OperationModule>()
         apiGen.api.paths.getOrPut(path) { PathItemModel() }.also {pathItem ->
             methods.forEach {
-                val name = it.method.value.toLowerCase()
+                val name = it.method.value.lowercase()
                 //if (pathItem.containsKey(name)) error("$path::$name already defined")
                 val op = pathItem.getOrPut(name) { OperationModel() } as OperationModel
                 operationModules.forEach {

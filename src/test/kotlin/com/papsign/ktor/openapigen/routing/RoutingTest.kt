@@ -10,7 +10,7 @@ import installJackson
 import installOpenAPI
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
-import io.ktor.routing.Routing
+import io.ktor.server.routing.Routing
 import io.ktor.server.testing.contentType
 import io.ktor.server.testing.handleRequest
 import io.ktor.server.testing.setBody
@@ -93,7 +93,7 @@ class RoutingTest {
             apiRouting {
                 (this.ktorRoute as Routing).trace { println(it.buildText()) }
                 route(route) {
-                    post<Unit, TestResponse, Unit> { params, body ->
+                    post<Unit, TestResponse, Unit> { _, _ ->
                         respond(TestResponse("Test Response"))
                     }
                 }
@@ -120,7 +120,7 @@ class RoutingTest {
             apiRouting {
                 (this.ktorRoute as Routing).trace { println(it.buildText()) }
                 route(route) {
-                    get<Unit, TestResponse> { params ->
+                    get<Unit, TestResponse> {
                         respond(TestResponse("Test Response"))
                     }
                 }

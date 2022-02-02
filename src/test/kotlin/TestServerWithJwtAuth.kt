@@ -1,4 +1,3 @@
-import io.ktor.auth.jwt.jwt
 import com.auth0.jwk.JwkProvider
 import com.auth0.jwk.JwkProviderBuilder
 import com.fasterxml.jackson.annotation.JsonInclude
@@ -27,20 +26,21 @@ import com.papsign.ktor.openapigen.route.path.auth.*
 import com.papsign.ktor.openapigen.route.response.respond
 import com.papsign.ktor.openapigen.schema.namer.DefaultSchemaNamer
 import com.papsign.ktor.openapigen.schema.namer.SchemaNamer
-import io.ktor.application.*
-import io.ktor.auth.Authentication
-import io.ktor.auth.Principal
-import io.ktor.auth.authenticate
-import io.ktor.auth.authentication
-import io.ktor.features.ContentNegotiation
-import io.ktor.features.origin
-import io.ktor.jackson.jackson
-import io.ktor.request.host
-import io.ktor.request.port
-import io.ktor.response.respond
-import io.ktor.response.respondRedirect
-import io.ktor.routing.get
-import io.ktor.routing.routing
+import io.ktor.server.application.*
+import io.ktor.server.auth.Authentication
+import io.ktor.server.auth.Principal
+import io.ktor.server.auth.authenticate
+import io.ktor.server.auth.authentication
+import io.ktor.server.plugins.ContentNegotiation
+import io.ktor.server.plugins.origin
+import io.ktor.serialization.jackson.jackson
+import io.ktor.server.auth.jwt.jwt
+import io.ktor.server.request.host
+import io.ktor.server.request.port
+import io.ktor.server.response.respond
+import io.ktor.server.response.respondRedirect
+import io.ktor.server.routing.get
+import io.ktor.server.routing.routing
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.util.pipeline.PipelineContext
@@ -60,7 +60,7 @@ object TestServerWithJwtAuth {
     public fun Application.testServerWithJwtAuth() {
         //define basic OpenAPI info
         val authProvider = JwtProvider();
-        val api = install(com.papsign.ktor.openapigen.OpenAPIGen) {
+        val api = install(OpenAPIGen) {
             info {
                 version = "0.1"
                 title = "Test API"
@@ -74,15 +74,16 @@ object TestServerWithJwtAuth {
                 description = "Main production server"
             }
             addModules(authProvider)
-            replaceModule(com.papsign.ktor.openapigen.schema.namer.DefaultSchemaNamer, object: SchemaNamer {
+            replaceModule(com.papsign.ktor.openapigen.schema.namer.DefaultSchemaNamer, object : SchemaNamer {
                 val regex = kotlin.text.Regex("[A-Za-z0-9_.]+")
                 override fun get(type: KType): String {
-                    return type.toString().replace(regex) { it.value.split(".").last() }.replace(kotlin.text.Regex(">|<|, "), "_")
+                    return type.toString().replace(regex) { it.value.split(".").last() }
+                        .replace(kotlin.text.Regex(">|<|, "), "_")
                 }
             })
         }
 
-        install(io.ktor.features.ContentNegotiation) {
+        install(io.ktor.server.plugins.ContentNegotiation) {
             jackson {
                 enable(
                     com.fasterxml.jackson.databind.DeserializationFeature.WRAP_EXCEPTIONS,
@@ -90,7 +91,10 @@ object TestServerWithJwtAuth {
                     com.fasterxml.jackson.databind.DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS
                 )
 
-                enable(com.fasterxml.jackson.databind.SerializationFeature.WRAP_EXCEPTIONS, com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT)
+                enable(
+                    com.fasterxml.jackson.databind.SerializationFeature.WRAP_EXCEPTIONS,
+                    com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT
+                )
 
                 setSerializationInclusion(com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL)
 
@@ -103,7 +107,7 @@ object TestServerWithJwtAuth {
             }
         }
 
-        install(io.ktor.auth.Authentication) {
+        install(io.ktor.server.auth.Authentication) {
             installJwt(this)
         }
 
@@ -133,7 +137,7 @@ object TestServerWithJwtAuth {
                     com.papsign.ktor.openapigen.route.info("String Param Endpoint", "This is a String Param Endpoint"),
                     example = StringResponse("Hi")
                 ) { params ->
-                    val (userId, name) = principal()
+                    val (_, name) = principal()
                     respond(StringResponse("Hello $name, you submitted ${params.a}"))
                 }
             }
@@ -150,7 +154,8 @@ object TestServerWithJwtAuth {
 
     inline fun NormalOpenAPIRoute.auth(route: OpenAPIAuthenticatedRoute<UserPrincipal>.() -> Unit): OpenAPIAuthenticatedRoute<UserPrincipal> {
         val authenticatedKtorRoute = this.ktorRoute.authenticate { }
-        var openAPIAuthenticatedRoute= OpenAPIAuthenticatedRoute(authenticatedKtorRoute, this.provider.child(), authProvider = authProvider);
+        var openAPIAuthenticatedRoute =
+            OpenAPIAuthenticatedRoute(authenticatedKtorRoute, this.provider.child(), authProvider = authProvider);
         return openAPIAuthenticatedRoute.apply {
             route()
         }
@@ -160,24 +165,26 @@ object TestServerWithJwtAuth {
 
     class JwtProvider : AuthProvider<UserPrincipal> {
         override val security: Iterable<Iterable<AuthProvider.Security<*>>> =
-            listOf(listOf(
-                AuthProvider.Security(
-                    SecuritySchemeModel(
-                        SecuritySchemeType.http,
-                        scheme = HttpSecurityScheme.bearer,
-                        bearerFormat = "JWT",
-                        referenceName = "jwtAuth",
-                    ), emptyList<Scopes>()
-                ),
-                AuthProvider.Security(
-                    SecuritySchemeModel(
-                        SecuritySchemeType.apiKey,
-                        `in` = APIKeyLocation.cookie,
-                        name = "ThisIsCookieName",
-                        referenceName = "ThisIsSchemeName",
-                    ), emptyList<Scopes>()
+            listOf(
+                listOf(
+                    AuthProvider.Security(
+                        SecuritySchemeModel(
+                            SecuritySchemeType.http,
+                            scheme = HttpSecurityScheme.bearer,
+                            bearerFormat = "JWT",
+                            referenceName = "jwtAuth",
+                        ), emptyList<Scopes>()
+                    ),
+                    AuthProvider.Security(
+                        SecuritySchemeModel(
+                            SecuritySchemeType.apiKey,
+                            `in` = APIKeyLocation.cookie,
+                            name = "ThisIsCookieName",
+                            referenceName = "ThisIsSchemeName",
+                        ), emptyList<Scopes>()
+                    )
                 )
-            ))
+            )
 
         override suspend fun getAuth(pipeline: PipelineContext<Unit, ApplicationCall>): UserPrincipal {
             return pipeline.context.authentication.principal() ?: throw RuntimeException("No JWTPrincipal")
@@ -193,11 +200,11 @@ object TestServerWithJwtAuth {
         Profile("Some scope")
     }
 
-    val jwtRealm : String = "example-jwt-realm"
+    val jwtRealm: String = "example-jwt-realm"
     val jwtIssuer: String = "http://localhost:9091/auth/realms/$jwtRealm"
     val jwtEndpoint: String = "$jwtIssuer/protocol/openid-connect/certs"
 
-    fun installJwt (provider: Authentication.Configuration) {
+    fun installJwt(provider: Authentication.Configuration) {
         provider.apply {
             jwt {
                 realm = jwtRealm
@@ -205,7 +212,8 @@ object TestServerWithJwtAuth {
                 validate { credentials ->
                     UserPrincipal(
                         credentials.payload.subject,
-                        credentials.payload.claims["name"]?.asString())
+                        credentials.payload.claims["name"]?.asString()
+                    )
                 }
             }
         }

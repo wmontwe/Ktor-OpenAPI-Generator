@@ -14,10 +14,10 @@ import com.papsign.ktor.openapigen.route.route
 import com.papsign.ktor.openapigen.route.throws
 import installJackson
 import installOpenAPI
-import io.ktor.application.*
-import io.ktor.auth.*
+import io.ktor.server.application.*
+import io.ktor.server.auth.*
 import io.ktor.http.*
-import io.ktor.response.*
+import io.ktor.server.response.*
 import io.ktor.server.testing.*
 import io.ktor.util.pipeline.*
 import org.junit.Test

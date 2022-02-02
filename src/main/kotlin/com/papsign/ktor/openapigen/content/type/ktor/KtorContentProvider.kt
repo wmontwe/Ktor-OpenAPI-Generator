@@ -21,6 +21,8 @@ import io.ktor.server.plugins.ContentNegotiation
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.util.pipeline.*
+import io.ktor.util.reflect.TypeInfo
+import io.ktor.util.reflect.platformType
 import kotlin.reflect.KType
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.jvm.jvmErasure
@@ -35,7 +37,7 @@ object KtorContentProvider : ContentTypeProvider, BodyParser, ResponseSerializer
 
     private fun initContentTypes(apiGen: OpenAPIGen): Set<ContentType>? {
         contentNegotiation = contentNegotiation ?: apiGen.pipeline.pluginOrNull(ContentNegotiation) ?: return null
-        contentTypes = contentNegotiation!!.registrations.map { it.contentType }.toSet()
+        contentTypes = ContentNegotiationHelper.contentTypes(contentNegotiation)
         return contentTypes
     }
 
@@ -77,7 +79,8 @@ object KtorContentProvider : ContentTypeProvider, BodyParser, ResponseSerializer
     }
 
     override suspend fun <T : Any> parseBody(clazz: KType, request: PipelineContext<Unit, ApplicationCall>): T {
-        return request.call.receive(clazz)
+        // FIXME
+        return request.call.receive(TypeInfo(clazz.jvmErasure, clazz.platformType, clazz))
     }
 
     override fun <T : Any> getSerializableContentTypes(type: KType): List<ContentType> {
